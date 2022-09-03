@@ -29,15 +29,19 @@ const displayNews = async () => {
     const data = await loadAllNews();
     // console.log(data.data);
     const newsData = data.data;
-    // console.log(newsData);
+    console.log(newsData);
 
     const newsContainer = document.getElementById('news-container');
 
     newsContainer.textContent = '';
+    const categoryCounter = document.getElementById('result-counter');
+    console.log(categoryCounter);
+
 
     for (const news of newsData) {
-        console.log(news);
+        // console.log(news);
         const { author, details, thumbnail_url, title, total_view } = news;
+        // console.log(details, image_url);
         const div = document.createElement('div');
         div.innerHTML = `<div class="card mb-3  p-3">
     <div class="row g-0 conatiner-fluid">
@@ -49,16 +53,22 @@ const displayNews = async () => {
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">${details.length > 200 ? details.slice(0, 200) + '...' : details}</p>
             </div>
-            <div class="card-body d-flex justify-content-between">
-                <div class="d-flex ">
-                    <img src="" alt="">
+                <div class="card-body d-flex justify-content-between">
+                    <div class="d-flex ">
+                    <a class="navbar-brand m-3  " href="#">
+                    <img src=${author.img} alt="" width="30" height="30">
+                   </a>          
                     <div>
-                    <h5>${author.name}</h5>
+                    <h5>${author.name === "system" ? 'no data found' : author.name}</h5>
                     <p>${author.published_date}</p>
                     </div>
                 </div>
                 <p class="my-auto"> <i class="fa-regular fa-eye"></i> ${total_view === 0 ? 'no data found' : total_view}</p>
-                <button class="btn btn-primary">Details</button>
+
+                <button type="button" onclick="showModal('${title}','${thumbnail_url}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                show details
+                </button>
+
             </div>
         </div>
     </div>
@@ -68,3 +78,19 @@ const displayNews = async () => {
 
 }
 displayNews();
+
+const showModal = (details, image) => {
+
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">${details}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+    <img class="img-fluid" src=${image} alt="">
+    </div>
+    
+    `;
+}
