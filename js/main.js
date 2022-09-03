@@ -12,6 +12,7 @@ const loadAllNews = async () => {
 const setAllCategories = async () => {
     const data = await loadAllCategories();
     const newData = data.data.news_category;
+    // console.log(newData);
 
     const categories = document.getElementById('all-categories');
 
@@ -29,13 +30,11 @@ const displayNews = async () => {
     const data = await loadAllNews();
     // console.log(data.data);
     const newsData = data.data;
-    console.log(newsData);
+    // console.log(newsData);
 
     const newsContainer = document.getElementById('news-container');
 
     newsContainer.textContent = '';
-    const categoryCounter = document.getElementById('result-counter');
-    console.log(categoryCounter);
 
 
     for (const news of newsData) {
@@ -94,3 +93,17 @@ const showModal = (details, image) => {
     
     `;
 }
+const totalItem = async () => {
+    const data = await loadAllCategories();
+
+    const nameData = data.data.news_category;
+    console.log(nameData);
+    for (const news of nameData) {
+        const categoryCounter = document.getElementById('result-counter');
+        console.log(categoryCounter);
+        categoryCounter.innerHTML = `${news.length}     item found for categorie  ${news.category_name}`
+    }
+
+
+}
+totalItem();
