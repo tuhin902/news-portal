@@ -32,9 +32,6 @@ const displayNews = async () => {
     const newsData = data.data;
     // console.log(newsData);
 
-    const newsContainer = document.getElementById('news-container');
-    const spinner = document.getElementById('spinner');
-
     newsContainer.textContent = '';
 
 
@@ -153,4 +150,4 @@ const showCategoryNews = async () => {
         categoryContainer.appendChild(div);
     })
 }
-// showCategoryNews();
+showCategoryNews();
