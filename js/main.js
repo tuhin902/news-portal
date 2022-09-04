@@ -18,7 +18,7 @@ const setAllCategories = async () => {
 
     for (const news of newData) {
         const span = document.createElement('span');
-        span.innerHTML = `<a>${news.category_name}</a>`;
+        span.innerHTML = `<button onclick="showCategoryNews()" class="btn"><a>${news.category_name}</a></button>`;
         categories.appendChild(span);
     }
 }
@@ -97,13 +97,18 @@ const totalItem = async () => {
     const data = await loadAllCategories();
 
     const nameData = data.data.news_category;
-    console.log(nameData);
+    // console.log(nameData);
     for (const news of nameData) {
         const categoryCounter = document.getElementById('result-counter');
-        console.log(categoryCounter);
+        // console.log(categoryCounter);
         categoryCounter.innerHTML = `${news.length}     item found for categorie  ${news.category_name}`
     }
 
 
 }
 totalItem();
+
+const showCategoryNews = () => {
+
+}
+showCategoryNews();
